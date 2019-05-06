@@ -1,6 +1,10 @@
 var request = require('request');
 var token = require('./secrets.js');
 var fs = require('fs');
+var owner = process.argv[2];
+var name = process.argv[3];
+console.log('owner: ', owner);
+console.log('name: ', name);
 function getRepoContributors(repoOwner, repoName, cb) {
   var options = {
     url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
@@ -15,7 +19,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
 }
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(owner, name, function(err, result) {
   console.log("Errors:", err);
   // console.log("Result:", result);
   var parsedData = JSON.parse(result);
